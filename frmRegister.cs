@@ -12,8 +12,7 @@ namespace Banque_Misr {
     public StreamWriter sw;
     public StreamReader sr;
     [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
-    private static extern IntPtr CreateRoundRectRgn
-    (
+    private static extern IntPtr CreateRoundRectRgn(
         int nLeftRect,     // x-coordinate of upper-left corner
         int nTopRect,      // y-coordinate of upper-left corner
         int nRightRect,    // x-coordinate of lower-right corner
@@ -29,8 +28,7 @@ namespace Banque_Misr {
     }
 
     private void darkToggle_Click(object sender, EventArgs e) {
-      if (!darkOn) //On white page
-      {
+      if (!darkOn) {//On white page 
         fs.Seek(0, SeekOrigin.Begin);
         sw.WriteLine("0");
         sw.Flush();
@@ -60,8 +58,7 @@ namespace Banque_Misr {
         darkToggle.Image = global::Banque_Misr.Properties.Resources.Nightmode;
         darkToggle.FlatAppearance.BorderColor = Color.White;
       }
-      else //on dark page
-      {
+      else {//on dark page
         fs.Seek(0, SeekOrigin.Begin);
         sw.WriteLine("1");
         sw.Flush();
@@ -235,7 +232,6 @@ namespace Banque_Misr {
         darkToggle.FlatAppearance.MouseDownBackColor = Color.Transparent;
         darkToggle.FlatAppearance.MouseOverBackColor = Color.Transparent;
       }
-
     }
 
     private void btnClose_MouseEnter(object sender, EventArgs e) {
