@@ -41,7 +41,7 @@
             "View Balance",
             "Deposit",
             "Withdraw"});
-      this.comboBox1.Location = new System.Drawing.Point(291, 15);
+      this.comboBox1.Location = new System.Drawing.Point(193, 21);
       this.comboBox1.Name = "comboBox1";
       this.comboBox1.Size = new System.Drawing.Size(121, 21);
       this.comboBox1.TabIndex = 0;
@@ -49,7 +49,7 @@
       // label1
       // 
       this.label1.AutoSize = true;
-      this.label1.Location = new System.Drawing.Point(217, 20);
+      this.label1.Location = new System.Drawing.Point(119, 26);
       this.label1.Name = "label1";
       this.label1.Size = new System.Drawing.Size(68, 13);
       this.label1.TabIndex = 1;
@@ -59,14 +59,14 @@
       // 
       this.panel1.Location = new System.Drawing.Point(25, 62);
       this.panel1.Name = "panel1";
-      this.panel1.Size = new System.Drawing.Size(610, 377);
+      this.panel1.Size = new System.Drawing.Size(398, 231);
       this.panel1.TabIndex = 2;
       // 
       // frmClientOptions
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(684, 463);
+      this.ClientSize = new System.Drawing.Size(479, 315);
       this.Controls.Add(this.panel1);
       this.Controls.Add(this.label1);
       this.Controls.Add(this.comboBox1);
@@ -81,6 +81,6 @@
 
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel1;
-    }
+    private System.Windows.Forms.Panel panel1;
+  }
 }
