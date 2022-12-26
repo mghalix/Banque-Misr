@@ -5,5 +5,10 @@ namespace Banque_Misr {
     public frmTransfer() {
       InitializeComponent();
     }
-  }
+
+        private void frmTransfer_Load(object sender, System.EventArgs e)
+        {
+
+        }
+    }
 }
