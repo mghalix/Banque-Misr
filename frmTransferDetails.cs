@@ -5,5 +5,10 @@ namespace Banque_Misr {
     public frmTransferDetails() {
       InitializeComponent();
     }
-  }
+
+        private void label2_Click(object sender, System.EventArgs e)
+        {
+
+        }
+    }
 }
