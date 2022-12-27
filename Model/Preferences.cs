@@ -1,9 +1,8 @@
 ﻿namespace Banque_Misr.Model {
   internal class Preferences {
-    Mode mode;
+    public static Mode sMode { get; set; }
     Client client;
     Preferences() {
-      mode = Mode.Light;
       //string branchCode, ssn, accountNo, accountType, name, phone, password;
 
       //client = new Client(branchCode, ssn, accountNo, accountType, name, phone, password);

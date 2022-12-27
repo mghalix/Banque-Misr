@@ -1,5 +1,5 @@
 ﻿namespace Banque_Misr.Model {
-  internal enum AccountTypes {
+  internal enum AccountType {
     Savings = 0,
     Current = 1,
   }

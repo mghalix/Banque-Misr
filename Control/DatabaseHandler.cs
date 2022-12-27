@@ -5,7 +5,7 @@ namespace Banque_Misr.Control {
   internal class DatabaseHandler {
     private const string DB_URL = @"Data Source=.;Initial Catalog=Banque_Misr;Integrated Security=True";
     private const string DB_NAME = "Banque_Misr";
-    //DatabaseHandler dataHandler;
+
     public DatabaseHandler() {
       string query = $@"SELECT database_id FROM sys.databases WHERE Name 
       = '{DB_NAME}'";
@@ -13,8 +13,8 @@ namespace Banque_Misr.Control {
       using (SqlCommand command = new SqlCommand(query, conn))
         if ((int)command.ExecuteScalar() == 1)
           return;
-
     }
+
     public static T execQuery<T>(string query) where T : class, new() {
       T obj = new T();
       try {

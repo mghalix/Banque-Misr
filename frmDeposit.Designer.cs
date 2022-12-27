@@ -1,6 +1,6 @@
 ﻿namespace Banque_Misr
 {
-    partial class frmDeposit
+    partial class FrmDeposit
     {
         /// <summary>
         /// Required designer variable.

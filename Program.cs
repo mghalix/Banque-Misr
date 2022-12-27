@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Banque_Misr.Model;
+using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Banque_Misr {
@@ -10,7 +12,15 @@ namespace Banque_Misr {
     static void Main() {
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
-      Application.Run(new frmLogin());
+      FileStream fs = new FileStream("ClientInfo.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+      StreamReader sr = new StreamReader(fs);
+      if (sr.ReadLine() == ((int)Mode.Dark).ToString())
+        Preferences.sMode = Mode.Dark;
+      else
+        Preferences.sMode = Mode.Light;
+      sr.Close();
+      fs.Close();
+      Application.Run(new FrmLogin());
     }
   }
 }

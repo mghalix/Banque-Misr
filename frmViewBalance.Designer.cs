@@ -1,5 +1,5 @@
 ﻿namespace Banque_Misr {
-  partial class frmViewBalance {
+  partial class FrmViewBalance {
     /// <summary>
     /// Required designer variable.
     /// </summary>

@@ -1,6 +1,6 @@
 ﻿namespace Banque_Misr
 {
-    partial class frmWithdraw
+    partial class FrmWithdraw
     {
         /// <summary>
         /// Required designer variable.

@@ -1,5 +1,5 @@
 ﻿namespace Banque_Misr {
-  partial class frmLogin {
+  partial class FrmLogin {
     /// <summary>
     /// Required designer variable.
     /// </summary>
@@ -23,7 +23,7 @@
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLogin));
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmLogin));
       this.label1 = new System.Windows.Forms.Label();
       this.label2 = new System.Windows.Forms.Label();
       this.txtUsername = new System.Windows.Forms.TextBox();
@@ -56,9 +56,9 @@
       this.label2.Font = new System.Drawing.Font("Nirmala UI", 9.818182F, System.Drawing.FontStyle.Bold);
       this.label2.Location = new System.Drawing.Point(35, 128);
       this.label2.Name = "label2";
-      this.label2.Size = new System.Drawing.Size(76, 19);
+      this.label2.Size = new System.Drawing.Size(122, 19);
       this.label2.TabIndex = 5;
-      this.label2.Text = "Username";
+      this.label2.Text = "Account Number";
       // 
       // txtUsername
       // 
@@ -224,7 +224,7 @@
       this.darkToggle.MouseEnter += new System.EventHandler(this.darkToggle_MouseEnter);
       this.darkToggle.MouseLeave += new System.EventHandler(this.darkToggle_MouseLeave);
       // 
-      // frmLogin
+      // FrmLogin
       // 
       this.AcceptButton = this.button1;
       this.AutoScaleDimensions = new System.Drawing.SizeF(5F, 12F);
@@ -248,7 +248,7 @@
       this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(165)))), ((int)(((byte)(169)))));
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-      this.Name = "frmLogin";
+      this.Name = "FrmLogin";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "Login";
       this.Load += new System.EventHandler(this.frmLogin_Load);

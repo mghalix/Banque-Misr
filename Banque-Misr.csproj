@@ -47,53 +47,53 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Control\DatabaseHandler.cs" />
-    <Compile Include="frmClientOptions.cs">
+    <Compile Include="FrmClientOptions.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmClientOptions.Designer.cs">
-      <DependentUpon>frmClientOptions.cs</DependentUpon>
+    <Compile Include="FrmClientOptions.Designer.cs">
+      <DependentUpon>FrmClientOptions.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmDeposit.cs">
+    <Compile Include="FrmDeposit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmDeposit.Designer.cs">
-      <DependentUpon>frmDeposit.cs</DependentUpon>
+    <Compile Include="FrmDeposit.Designer.cs">
+      <DependentUpon>FrmDeposit.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmLogin.cs">
+    <Compile Include="FrmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLogin.Designer.cs">
-      <DependentUpon>frmLogin.cs</DependentUpon>
+    <Compile Include="FrmLogin.Designer.cs">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmRegister.cs">
+    <Compile Include="FrmRegister.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmRegister.Designer.cs">
-      <DependentUpon>frmRegister.cs</DependentUpon>
+    <Compile Include="FrmRegister.Designer.cs">
+      <DependentUpon>FrmRegister.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmTransfer.cs">
+    <Compile Include="FrmTransfer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTransfer.Designer.cs">
-      <DependentUpon>frmTransfer.cs</DependentUpon>
+    <Compile Include="FrmTransfer.Designer.cs">
+      <DependentUpon>FrmTransfer.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmTransferDetails.cs">
+    <Compile Include="FrmTransferDetails.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTransferDetails.Designer.cs">
-      <DependentUpon>frmTransferDetails.cs</DependentUpon>
+    <Compile Include="FrmTransferDetails.Designer.cs">
+      <DependentUpon>FrmTransferDetails.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmViewBalance.cs">
+    <Compile Include="FrmViewBalance.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmViewBalance.Designer.cs">
-      <DependentUpon>frmViewBalance.cs</DependentUpon>
+    <Compile Include="FrmViewBalance.Designer.cs">
+      <DependentUpon>FrmViewBalance.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmWithdraw.cs">
+    <Compile Include="FrmWithdraw.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmWithdraw.Designer.cs">
-      <DependentUpon>frmWithdraw.cs</DependentUpon>
+    <Compile Include="FrmWithdraw.Designer.cs">
+      <DependentUpon>FrmWithdraw.cs</DependentUpon>
     </Compile>
     <Compile Include="IColorScheme.cs" />
     <Compile Include="IShowPassword.cs" />
@@ -104,29 +104,29 @@
     <Compile Include="Model\Preferences.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmClientOptions.resx">
-      <DependentUpon>frmClientOptions.cs</DependentUpon>
+    <EmbeddedResource Include="FrmClientOptions.resx">
+      <DependentUpon>FrmClientOptions.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmDeposit.resx">
-      <DependentUpon>frmDeposit.cs</DependentUpon>
+    <EmbeddedResource Include="FrmDeposit.resx">
+      <DependentUpon>FrmDeposit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLogin.resx">
-      <DependentUpon>frmLogin.cs</DependentUpon>
+    <EmbeddedResource Include="FrmLogin.resx">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmRegister.resx">
-      <DependentUpon>frmRegister.cs</DependentUpon>
+    <EmbeddedResource Include="FrmRegister.resx">
+      <DependentUpon>FrmRegister.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTransfer.resx">
-      <DependentUpon>frmTransfer.cs</DependentUpon>
+    <EmbeddedResource Include="FrmTransfer.resx">
+      <DependentUpon>FrmTransfer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTransferDetails.resx">
-      <DependentUpon>frmTransferDetails.cs</DependentUpon>
+    <EmbeddedResource Include="FrmTransferDetails.resx">
+      <DependentUpon>FrmTransferDetails.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmViewBalance.resx">
-      <DependentUpon>frmViewBalance.cs</DependentUpon>
+    <EmbeddedResource Include="FrmViewBalance.resx">
+      <DependentUpon>FrmViewBalance.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmWithdraw.resx">
-      <DependentUpon>frmWithdraw.cs</DependentUpon>
+    <EmbeddedResource Include="FrmWithdraw.resx">
+      <DependentUpon>FrmWithdraw.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

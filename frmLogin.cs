@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace Banque_Misr {
-  public partial class frmLogin : Form, IShowPassword, IColorScheme {
+  public partial class FrmLogin : Form, IShowPassword, IColorScheme {
     //Members
-    FileStream fs;
-    StreamReader sr;
-    StreamWriter sw;
-    private Mode mode = Mode.Light;
+    private readonly FileStream fs;
+    private readonly StreamReader sr;
+    private readonly StreamWriter sw;
+
     [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
     private static extern IntPtr CreateRoundRectRgn(
         int nLeftRect,     // x-coordinate of upper-left corner
@@ -21,16 +21,22 @@ namespace Banque_Misr {
         int nWidthEllipse, // width of ellipse
         int nHeightEllipse // height of ellipse
     );
-    public frmLogin() {
+    public FrmLogin() {
       InitializeComponent();
       this.FormBorderStyle = FormBorderStyle.None;
       Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 50, 50));
       txtUsername.TabIndex = 0;
       txtPassword.TabIndex = 1;
+
+      fs = new FileStream("Clientinfo.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+      sr = new StreamReader(fs);
+      sw = new StreamWriter(fs);
+
+      fs.Seek(0, SeekOrigin.Begin);
     }
     void close() {
       fs.Seek(0, SeekOrigin.Begin);
-      sw.WriteLine((int)mode);
+      sw.WriteLine((int)Preferences.sMode);
       sw.Flush();
       sw.Close();
       sr.Close();
@@ -38,7 +44,7 @@ namespace Banque_Misr {
     }
     public void darkToggle_Click(object sender, EventArgs e) {
       darkToggle.Image = null;
-      if (mode == Mode.Light) {
+      if (Preferences.sMode == Mode.Light) {
         SetDark();
         return;
       }
@@ -55,20 +61,13 @@ namespace Banque_Misr {
 
     private void frmLogin_Load(object sender, EventArgs e) {
       ShowPassword();
-      fs = new FileStream("Clientinfo.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
-      sr = new StreamReader(fs);
-      sw = new StreamWriter(fs);
 
-      fs.Seek(0, SeekOrigin.Begin);
-
-      if (sr.ReadLine() == ((int)Mode.Light).ToString())
+      if (Preferences.sMode == Mode.Light)
         SetLight();
       else
         SetDark();
 
       txtUsername.Focus();
-      sr.DiscardBufferedData();
-
     }
     private void button2_Click(object sender, EventArgs e) {
       txtPassword.Clear();
@@ -77,7 +76,7 @@ namespace Banque_Misr {
 
     private void label6_Click(object sender, EventArgs e) {
       close();
-      frmRegister frm = new frmRegister();
+      FrmRegister frm = new FrmRegister();
       this.Hide();
       frm.Show();
 
@@ -108,7 +107,7 @@ namespace Banque_Misr {
 
         if (txtUsername.Text.ToLower() == field[2].ToLower() && txtPassword.Text == field[3]) {
           sr.Close();
-          frmClientOptions main = new frmClientOptions();
+          FrmClientOptions main = new FrmClientOptions();
           this.Hide();
           main.Show();
           return;
@@ -128,7 +127,7 @@ namespace Banque_Misr {
       this.WindowState = FormWindowState.Minimized;
     }
     public void SetLight() {
-      mode = Mode.Light;
+      Preferences.sMode = Mode.Light;
       darkToggle.FlatAppearance.MouseDownBackColor = Color.Transparent;
       this.BackColor = Color.White;
       this.ForeColor = Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(165)))), ((int)(((byte)(169)))));
@@ -148,7 +147,7 @@ namespace Banque_Misr {
     }
     public void SetDark() {
       darkToggle.FlatAppearance.MouseDownBackColor = Color.Transparent;
-      mode = Mode.Dark;
+      Preferences.sMode = Mode.Dark;
       this.ForeColor = Color.GhostWhite;
       this.BackColor = Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
       darkToggle.BackColor = System.Drawing.Color.Transparent;
@@ -183,7 +182,7 @@ namespace Banque_Misr {
       label5.ForeColor = Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(165)))), ((int)(((byte)(169)))));
     }
     private void darkToggle_MouseEnter(object sender, EventArgs e) {
-      if (mode == Mode.Dark) {
+      if (Preferences.sMode == Mode.Dark) {
         darkToggle.Image = (System.Drawing.Image)(Banque_Misr.Properties.Resources.Lightmode_v1Hover);
         darkToggle.FlatAppearance.BorderColor = Color.FromArgb(13, 17, 24);
         return;
@@ -193,7 +192,7 @@ namespace Banque_Misr {
     }
 
     private void darkToggle_MouseLeave(object sender, EventArgs e) {
-      if (mode == Mode.Dark) {
+      if (Preferences.sMode == Mode.Dark) {
         darkToggle.Image = (Banque_Misr.Properties.Resources.Lightmode_v1);
         darkToggle.FlatAppearance.MouseDownBackColor = Color.Transparent;
         darkToggle.FlatAppearance.MouseOverBackColor = Color.Transparent;

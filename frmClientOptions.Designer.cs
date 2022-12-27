@@ -1,6 +1,6 @@
 ﻿namespace Banque_Misr
 {
-    partial class frmClientOptions
+    partial class FrmClientOptions
     {
         /// <summary>
         /// Required designer variable.

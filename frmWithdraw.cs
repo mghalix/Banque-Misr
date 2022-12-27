@@ -1,8 +1,8 @@
 ﻿using System.Windows.Forms;
 
 namespace Banque_Misr {
-  public partial class frmWithdraw : Form {
-    public frmWithdraw() {
+  public partial class FrmWithdraw : Form {
+    public FrmWithdraw() {
       InitializeComponent();
     }
   }
