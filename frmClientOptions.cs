@@ -57,7 +57,6 @@ namespace Banque_Misr {
           initPanelOpt(selectedForm);
           break;
         case 2: // deposit
-          FrmDeposit deposit = new FrmDeposit();
           selectedForm = new FrmDeposit();
           initPanelOpt(selectedForm);
           break;
@@ -123,21 +122,24 @@ namespace Banque_Misr {
         selectedForm.BackColor = Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
       }
 
-      foreach (var c in selectedForm.Controls) {
-        if (c is Button) {
-          if (Preferences.sMode == Mode.Light)
-            ((Button)c).BackColor = Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(41)))), ((int)(((byte)(87)))));
-          else
-            ((Button)c).BackColor = Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(77)))), ((int)(((byte)(163)))));
-          continue;
-        }
-
-        if (c is Label) {
-          if (Preferences.sMode == Mode.Light)
+      foreach (object c in selectedForm.Controls) {
+        if (Preferences.sMode == Mode.Light) {
+          if (c is Label) {
             ((Label)c).ForeColor = Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(41)))), ((int)(((byte)(87)))));
-          else
-            ((Label)c).ForeColor = Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(77)))), ((int)(((byte)(163)))));
-          continue;
+          }
+
+          if (c is Button) {
+            ((Button)c).BackColor = Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(41)))), ((int)(((byte)(87)))));
+          }
+          else {
+            if (c is Label)
+              ((Label)c).ForeColor = Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(77)))), ((int)(((byte)(163)))));
+
+            if (c is Button)
+              ((Button)c).BackColor = Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(77)))), ((int)(((byte)(163)))));
+            if (c is ComboBox)
+              ((ComboBox)c).BackColor = Color.Gainsboro;
+          }
         }
       }
     }

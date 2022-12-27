@@ -1,4 +1,5 @@
-﻿using Banque_Misr.Model;
+﻿using Banque_Misr.Control;
+using Banque_Misr.Model;
 using System;
 using System.IO;
 using System.Windows.Forms;
@@ -10,6 +11,7 @@ namespace Banque_Misr {
     /// </summary>
     [STAThread]
     static void Main() {
+      DatabaseHandler dataHandler = new DatabaseHandler();
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
       FileStream fs = new FileStream("ClientInfo.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
@@ -20,6 +22,7 @@ namespace Banque_Misr {
         Preferences.sMode = Mode.Light;
       sr.Close();
       fs.Close();
+
       Application.Run(new FrmLogin());
     }
   }
