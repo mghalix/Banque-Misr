@@ -10,7 +10,7 @@ namespace Banque_Misr {
     static void Main() {
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
-      Application.Run(new frmClientOptions());
+      Application.Run(new frmRegister());
     }
   }
 }
