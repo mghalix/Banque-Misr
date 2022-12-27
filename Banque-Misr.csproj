@@ -83,6 +83,12 @@
     <Compile Include="frmTransferDetails.Designer.cs">
       <DependentUpon>frmTransferDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmViewBalance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmViewBalance.Designer.cs">
+      <DependentUpon>frmViewBalance.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmWithdraw.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,6 +97,7 @@
     </Compile>
     <Compile Include="IShowPassword.cs" />
     <Compile Include="Model\AccountTypes.cs" />
+    <Compile Include="Model\Branch.cs" />
     <Compile Include="Model\Client.cs" />
     <Compile Include="Model\Modes.cs" />
     <Compile Include="Model\Preferences.cs" />
@@ -113,6 +120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmTransferDetails.resx">
       <DependentUpon>frmTransferDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmViewBalance.resx">
+      <DependentUpon>frmViewBalance.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmWithdraw.resx">
       <DependentUpon>frmWithdraw.cs</DependentUpon>

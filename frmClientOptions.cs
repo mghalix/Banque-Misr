@@ -20,10 +20,11 @@ namespace Banque_Misr {
           initPanelOpt(transfer);
           break;
         case 1: // view balance
+          frmViewBalance balance = new frmViewBalance();
           //string axn = "INSERT INTO branch VALUES('TestName2', 'TestCode2')";
           //DatabaseHandler.execAction(axn);
-          string query = "SELECT * FROM branch";
-          //DatabaseHandler.execQuery(query).
+          initPanelOpt(balance);
+          balance.Show();
           break;
         case 2: // deposit
           frmDeposit deposit = new frmDeposit();
