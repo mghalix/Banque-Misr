@@ -5,10 +5,10 @@ namespace Banque_Misr.Control {
   internal class DatabaseHandler {
     private const string DB_URL = @"Data Source=.;Initial Catalog=Banque_Misr;Integrated Security=True";
     private const string DB_NAME = "Banque_Misr";
-    DatabaseHandler dataHandler;
+    //DatabaseHandler dataHandler;
     public DatabaseHandler() {
       string query = $@"SELECT database_id FROM sys.databases WHERE Name 
- = '{DB_NAME}', databaseName";
+      = '{DB_NAME}'";
       using (SqlConnection conn = new SqlConnection(DB_URL))
       using (SqlCommand command = new SqlCommand(query, conn))
         if ((int)command.ExecuteScalar() == 1)
