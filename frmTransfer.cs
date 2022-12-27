@@ -6,9 +6,8 @@ namespace Banque_Misr {
       InitializeComponent();
     }
 
-        private void frmTransfer_Load(object sender, System.EventArgs e)
-        {
+    private void frmTransfer_Load(object sender, System.EventArgs e) {
 
-        }
     }
+  }
 }

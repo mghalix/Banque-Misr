@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Banque_Misr {
@@ -13,7 +10,7 @@ namespace Banque_Misr {
     static void Main() {
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
-      Application.Run(new frmTransfer());
+      Application.Run(new frmClientOptions());
     }
   }
 }
