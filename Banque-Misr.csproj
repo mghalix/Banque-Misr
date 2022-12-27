@@ -95,6 +95,7 @@
     <Compile Include="frmWithdraw.Designer.cs">
       <DependentUpon>frmWithdraw.cs</DependentUpon>
     </Compile>
+    <Compile Include="IColorScheme.cs" />
     <Compile Include="IShowPassword.cs" />
     <Compile Include="Model\AccountTypes.cs" />
     <Compile Include="Model\Branch.cs" />

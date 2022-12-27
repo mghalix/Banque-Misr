@@ -2,8 +2,19 @@
 using System.Windows.Forms;
 
 namespace Banque_Misr.Control {
-  internal static class DatabaseHandler {
+  internal class DatabaseHandler {
     private const string DB_URL = @"Data Source=.;Initial Catalog=Banque_Misr;Integrated Security=True";
+    private const string DB_NAME = "Banque_Misr";
+    DatabaseHandler dataHandler;
+    public DatabaseHandler() {
+      string query = $@"SELECT database_id FROM sys.databases WHERE Name 
+ = '{DB_NAME}', databaseName";
+      using (SqlConnection conn = new SqlConnection(DB_URL))
+      using (SqlCommand command = new SqlCommand(query, conn))
+        if ((int)command.ExecuteScalar() == 1)
+          return;
+
+    }
     public static T execQuery<T>(string query) where T : class, new() {
       T obj = new T();
       try {
@@ -41,5 +52,7 @@ namespace Banque_Misr.Control {
         obj.GetType().GetProperty(item.Name).SetValue(obj, dataReader[item.Name], null);
       }
     }
+
+
   }
 }

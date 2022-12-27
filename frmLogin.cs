@@ -1,19 +1,19 @@
-﻿using System;
+﻿using Banque_Misr.Model;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace Banque_Misr {
-  public partial class frmLogin : Form, IShowPassword {
+  public partial class frmLogin : Form, IShowPassword, IColorScheme {
     //Members
     FileStream fs;
     StreamReader sr;
     StreamWriter sw;
-    private bool darkOn = true;
+    private Mode mode = Mode.Light;
     [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
-    private static extern IntPtr CreateRoundRectRgn
-    (
+    private static extern IntPtr CreateRoundRectRgn(
         int nLeftRect,     // x-coordinate of upper-left corner
         int nTopRect,      // y-coordinate of upper-left corner
         int nRightRect,    // x-coordinate of lower-right corner
@@ -28,72 +28,21 @@ namespace Banque_Misr {
       txtUsername.TabIndex = 0;
       txtPassword.TabIndex = 1;
     }
+    void close() {
+      fs.Seek(0, SeekOrigin.Begin);
+      sw.WriteLine((int)mode);
+      sw.Flush();
+      sw.Close();
+      sr.Close();
+      fs.Close();
+    }
     public void darkToggle_Click(object sender, EventArgs e) {
       darkToggle.Image = null;
-      if (!darkOn) //on white mode
-      {
-        darkToggle.FlatAppearance.MouseDownBackColor = Color.Transparent;
-        fs.Seek(0, SeekOrigin.Begin);
-        sw.WriteLine("0");
-        sw.Flush();
-        darkOn = true;
-        this.BackColor = Color.White;
-        this.ForeColor = Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(165)))), ((int)(((byte)(169)))));
-
-        darkToggle.FlatAppearance.BorderColor = Color.White;
-        darkToggle.Image = global::Banque_Misr.Properties.Resources.Nightmode;
-        //----------------------/
-        label1.ForeColor = Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(41)))), ((int)(((byte)(87)))));
-        button1.BackColor = Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(41)))), ((int)(((byte)(87)))));
-        label6.ForeColor = Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(41)))), ((int)(((byte)(87)))));
-        //texts
-        txtPassword.BackColor = Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(231)))), ((int)(((byte)(233)))));
-        txtUsername.BackColor = Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(231)))), ((int)(((byte)(233)))));
-
-        txtUsername.ForeColor = Color.Black;
-        txtPassword.ForeColor = Color.Black;
+      if (mode == Mode.Light) {
+        SetDark();
+        return;
       }
-      else //on dark mode
-      {
-        darkToggle.FlatAppearance.MouseDownBackColor = Color.Transparent;
-        fs.Seek(0, SeekOrigin.Begin);
-        sw.WriteLine("1");
-        sw.Flush();
-        darkOn = false;
-        this.ForeColor = Color.GhostWhite;
-        this.BackColor = Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
-        darkToggle.BackColor = System.Drawing.Color.Transparent;
-        darkToggle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-        darkToggle.FlatAppearance.BorderColor = Color.FromArgb(13, 17, 163);
-        darkToggle.Image = global::Banque_Misr.Properties.Resources.Lightmode_v1;
-        darkToggle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-        darkToggle.ForeColor = System.Drawing.Color.White;
-        darkToggle.Name = "button1";
-        darkToggle.Size = new System.Drawing.Size(36, 31);
-        darkToggle.TabIndex = 0;
-        darkToggle.UseVisualStyleBackColor = false;
-        darkToggle.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
-        //-------------------------------//
-
-        //63, 77, 163
-        label1.ForeColor = Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(77)))), ((int)(((byte)(163)))));
-        button1.BackColor = Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(77)))), ((int)(((byte)(163)))));
-        button2.BackColor = Color.Transparent;
-        button2.ForeColor = Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(77)))), ((int)(((byte)(163)))));
-        label6.ForeColor = Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(77)))), ((int)(((byte)(163)))));
-        //texts
-        txtPassword.BackColor = Color.DarkGray;
-        txtUsername.BackColor = Color.DarkGray;
-
-        txtUsername.ForeColor = Color.Black;
-        txtPassword.ForeColor = Color.Black;
-
-        label2.ForeColor = Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(165)))), ((int)(((byte)(169)))));
-        label3.ForeColor = Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(165)))), ((int)(((byte)(169)))));
-        checkbxShowPass.ForeColor = Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(165)))), ((int)(((byte)(169)))));
-        label5.ForeColor = Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(165)))), ((int)(((byte)(169)))));
-
-      }
+      SetLight();
     }
 
     private void button1_Click(object sender, EventArgs e) {
@@ -101,23 +50,22 @@ namespace Banque_Misr {
     }
 
     private void checkbxShowPass_CheckedChanged(object sender, EventArgs e) {
-      showPassword();
+      ShowPassword();
     }
 
     private void frmLogin_Load(object sender, EventArgs e) {
-      showPassword();
+      ShowPassword();
       fs = new FileStream("Clientinfo.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
       sr = new StreamReader(fs);
       sw = new StreamWriter(fs);
-      fs.Seek(0, SeekOrigin.Begin);
-      if (sr.ReadLine() == "1") {
-        darkOn = true;
-        txtUsername.Focus();
-      }
-      else
-        darkOn = false;
 
-      darkToggle_Click(sender, e);
+      fs.Seek(0, SeekOrigin.Begin);
+
+      if (sr.ReadLine() == ((int)Mode.Light).ToString())
+        SetLight();
+      else
+        SetDark();
+
       txtUsername.Focus();
       sr.DiscardBufferedData();
 
@@ -128,14 +76,13 @@ namespace Banque_Misr {
     }
 
     private void label6_Click(object sender, EventArgs e) {
-      sw.Close();
-      fs.Close();
+      close();
       frmRegister frm = new frmRegister();
       this.Hide();
       frm.Show();
 
     }
-    public void showPassword() {
+    public void ShowPassword() {
       txtPassword.MaxLength = 14;
 
       if (!checkbxShowPass.Checked) {
@@ -173,47 +120,88 @@ namespace Banque_Misr {
       txtPassword.Focus();
     }
     private void btnClose_Click(object sender, EventArgs e) {
+      close();
       Application.Exit();
     }
 
     private void btnMinimize_Click(object sender, EventArgs e) {
       this.WindowState = FormWindowState.Minimized;
     }
+    public void SetLight() {
+      mode = Mode.Light;
+      darkToggle.FlatAppearance.MouseDownBackColor = Color.Transparent;
+      this.BackColor = Color.White;
+      this.ForeColor = Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(165)))), ((int)(((byte)(169)))));
 
-    private void btnMaximize_Click(object sender, EventArgs e) {
-      //if (WindowState == FormWindowState.Normal)
-      //    this.WindowState = FormWindowState.Maximized;
-      //else
-      //    this.WindowState = FormWindowState.Normal;
+      darkToggle.FlatAppearance.BorderColor = Color.White;
+      darkToggle.Image = global::Banque_Misr.Properties.Resources.Nightmode;
+      //----------------------/
+      label1.ForeColor = Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(41)))), ((int)(((byte)(87)))));
+      button1.BackColor = Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(41)))), ((int)(((byte)(87)))));
+      label6.ForeColor = Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(41)))), ((int)(((byte)(87)))));
+      //texts
+      txtPassword.BackColor = Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(231)))), ((int)(((byte)(233)))));
+      txtUsername.BackColor = Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(231)))), ((int)(((byte)(233)))));
+
+      txtUsername.ForeColor = Color.Black;
+      txtPassword.ForeColor = Color.Black;
     }
+    public void SetDark() {
+      darkToggle.FlatAppearance.MouseDownBackColor = Color.Transparent;
+      mode = Mode.Dark;
+      this.ForeColor = Color.GhostWhite;
+      this.BackColor = Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
+      darkToggle.BackColor = System.Drawing.Color.Transparent;
+      darkToggle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+      darkToggle.FlatAppearance.BorderColor = Color.FromArgb(13, 17, 163);
+      darkToggle.Image = global::Banque_Misr.Properties.Resources.Lightmode_v1;
+      darkToggle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      darkToggle.ForeColor = System.Drawing.Color.White;
+      darkToggle.Name = "button1";
+      darkToggle.Size = new System.Drawing.Size(36, 31);
+      darkToggle.TabIndex = 0;
+      darkToggle.UseVisualStyleBackColor = false;
+      darkToggle.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
+      //-------------------------------//
 
+      //63, 77, 163
+      label1.ForeColor = Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(77)))), ((int)(((byte)(163)))));
+      button1.BackColor = Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(77)))), ((int)(((byte)(163)))));
+      button2.BackColor = Color.Transparent;
+      button2.ForeColor = Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(77)))), ((int)(((byte)(163)))));
+      label6.ForeColor = Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(77)))), ((int)(((byte)(163)))));
+      //texts
+      txtPassword.BackColor = Color.DarkGray;
+      txtUsername.BackColor = Color.DarkGray;
+
+      txtUsername.ForeColor = Color.Black;
+      txtPassword.ForeColor = Color.Black;
+
+      label2.ForeColor = Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(165)))), ((int)(((byte)(169)))));
+      label3.ForeColor = Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(165)))), ((int)(((byte)(169)))));
+      checkbxShowPass.ForeColor = Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(165)))), ((int)(((byte)(169)))));
+      label5.ForeColor = Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(165)))), ((int)(((byte)(169)))));
+    }
     private void darkToggle_MouseEnter(object sender, EventArgs e) {
-      if (darkOn) //white
-      {
-        //darkToggle.FlatAppearance.MouseOverBackColor = Color.LightSlateGray;
-        darkToggle.Image = (System.Drawing.Image)(Banque_Misr.Properties.Resources.Nightmode_onHover);
-        darkToggle.FlatAppearance.BorderColor = Color.White;
-      }
-      if (!darkOn)// dark
-      {
-        //darkToggle.FlatAppearance.MouseOverBackColor = Color.WhiteSmoke;
+      if (mode == Mode.Dark) {
         darkToggle.Image = (System.Drawing.Image)(Banque_Misr.Properties.Resources.Lightmode_v1Hover);
         darkToggle.FlatAppearance.BorderColor = Color.FromArgb(13, 17, 24);
+        return;
       }
+      darkToggle.Image = (System.Drawing.Image)(Banque_Misr.Properties.Resources.Nightmode_onHover);
+      darkToggle.FlatAppearance.BorderColor = Color.White;
     }
 
     private void darkToggle_MouseLeave(object sender, EventArgs e) {
-      if (!darkOn) {
+      if (mode == Mode.Dark) {
         darkToggle.Image = (Banque_Misr.Properties.Resources.Lightmode_v1);
         darkToggle.FlatAppearance.MouseDownBackColor = Color.Transparent;
         darkToggle.FlatAppearance.MouseOverBackColor = Color.Transparent;
+        return;
       }
-      if (darkOn) {
-        darkToggle.Image = (Banque_Misr.Properties.Resources.Nightmode);
-        darkToggle.FlatAppearance.MouseDownBackColor = Color.Transparent;
-        darkToggle.FlatAppearance.MouseOverBackColor = Color.Transparent;
-      }
-
+      darkToggle.Image = (Banque_Misr.Properties.Resources.Nightmode);
+      darkToggle.FlatAppearance.MouseDownBackColor = Color.Transparent;
+      darkToggle.FlatAppearance.MouseOverBackColor = Color.Transparent;
     }
 
     private void btnClose_MouseEnter(object sender, EventArgs e) {

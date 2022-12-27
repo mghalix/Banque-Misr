@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace Banque_Misr {
-  public partial class frmRegister : Form, IShowPassword {
+  public partial class frmRegister : Form, IShowPassword, IColorScheme {
     //Members
     private Mode mode = Mode.Light;
     public FileStream fs;
@@ -26,44 +26,26 @@ namespace Banque_Misr {
       this.FormBorderStyle = FormBorderStyle.None;
       Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 50, 50));
     }
-
-    private void darkToggle_Click(object sender, EventArgs e) {
-      if (mode == Mode.Light) {//On white page 
-        fs.Seek(0, SeekOrigin.Begin);
-        sw.WriteLine((int)mode);
-        sw.Flush();
-        mode = Mode.Dark;
-        this.BackColor = Color.White;
-        this.ForeColor = Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(165)))), ((int)(((byte)(169)))));
-        //34, 41, 87
-        label1.ForeColor = Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(41)))), ((int)(((byte)(87)))));
-        button1.BackColor = Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(41)))), ((int)(((byte)(87)))));
-        button2.ForeColor = Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(41)))), ((int)(((byte)(87)))));
-        button2.BackColor = Color.Transparent;
-        label6.ForeColor = Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(41)))), ((int)(((byte)(87)))));
-        //text
-        txtName.BackColor = Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(231)))), ((int)(((byte)(233)))));
-        txtUsername.BackColor = Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(231)))), ((int)(((byte)(233)))));
-        txtPassword.BackColor = Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(231)))), ((int)(((byte)(233)))));
-        txtComPassword.BackColor = Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(231)))), ((int)(((byte)(233)))));
-        txtAge.BackColor = Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(231)))), ((int)(((byte)(233)))));
-
-        txtName.ForeColor = Color.Black;
-        txtUsername.ForeColor = Color.Black;
-        txtPassword.ForeColor = Color.Black;
-        txtComPassword.ForeColor = Color.Black;
-        txtAge.ForeColor = Color.Black;
-        //--------------------------------//
-        darkToggle.BackColor = Color.Transparent;
-        darkToggle.Image = global::Banque_Misr.Properties.Resources.Nightmode;
-        darkToggle.FlatAppearance.BorderColor = Color.White;
-        return;
-      }
-      //on dark page
+    void close() {
       fs.Seek(0, SeekOrigin.Begin);
       sw.WriteLine((int)mode);
       sw.Flush();
-      mode = Mode.Light;
+      sw.Close();
+      sr.Close();
+      fs.Close();
+    }
+
+    private void darkToggle_Click(object sender, EventArgs e) {
+      if (mode == Mode.Light) {//On white page 
+        SetDark();
+        return;
+      }
+      //on dark page
+      SetLight();
+    }
+
+    public void SetDark() {
+      mode = Mode.Dark;
       this.ForeColor = Color.GhostWhite;
       this.BackColor = Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
       //Colors
@@ -99,7 +81,6 @@ namespace Banque_Misr {
       darkToggle.Image = global::Banque_Misr.Properties.Resources.Lightmode_v1;
       darkToggle.BackColor = System.Drawing.Color.Transparent;
       darkToggle.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-      //darkToggle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
       darkToggle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       darkToggle.ForeColor = System.Drawing.Color.White;
       darkToggle.Name = "button1";
@@ -109,9 +90,36 @@ namespace Banque_Misr {
       darkToggle.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
     }
 
+    public void SetLight() {
+      mode = Mode.Light;
+      this.BackColor = Color.White;
+      this.ForeColor = Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(165)))), ((int)(((byte)(169)))));
+      //34, 41, 87
+      label1.ForeColor = Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(41)))), ((int)(((byte)(87)))));
+      button1.BackColor = Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(41)))), ((int)(((byte)(87)))));
+      button2.ForeColor = Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(41)))), ((int)(((byte)(87)))));
+      button2.BackColor = Color.Transparent;
+      label6.ForeColor = Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(41)))), ((int)(((byte)(87)))));
+      //text
+      txtName.BackColor = Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(231)))), ((int)(((byte)(233)))));
+      txtUsername.BackColor = Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(231)))), ((int)(((byte)(233)))));
+      txtPassword.BackColor = Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(231)))), ((int)(((byte)(233)))));
+      txtComPassword.BackColor = Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(231)))), ((int)(((byte)(233)))));
+      txtAge.BackColor = Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(231)))), ((int)(((byte)(233)))));
+
+      txtName.ForeColor = Color.Black;
+      txtUsername.ForeColor = Color.Black;
+      txtPassword.ForeColor = Color.Black;
+      txtComPassword.ForeColor = Color.Black;
+      txtAge.ForeColor = Color.Black;
+      //--------------------------------//
+      darkToggle.BackColor = Color.Transparent;
+      darkToggle.Image = global::Banque_Misr.Properties.Resources.Nightmode;
+      darkToggle.FlatAppearance.BorderColor = Color.White;
+    }
+
     private void label6_Click(object sender, EventArgs e) {
-      sw.Close();
-      fs.Close();
+      close();
       frmLogin frm = new frmLogin();
       this.Hide();
       frm.Show();
@@ -133,8 +141,6 @@ namespace Banque_Misr {
       else if (txtPassword.Text == txtComPassword.Text) {
         fs.Seek(0, SeekOrigin.End);
         sw.WriteLine($"{txtName.Text}|{txtAge.Text}|{txtUsername.Text.ToLower()}|{txtPassword.Text}");
-        sw.Close();
-        fs.Close();
         label6_Click(sender, e);
         MessageBox.Show("Your Account has been Succesfully Created", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
       }
@@ -156,9 +162,9 @@ namespace Banque_Misr {
     }
 
     private void checkbxShowPass_CheckedChanged(object sender, EventArgs e) {
-      showPassword();
+      ShowPassword();
     }
-    public void showPassword() {
+    public void ShowPassword() {
       txtPassword.MaxLength = 14;
       txtComPassword.MaxLength = 14;
 
@@ -173,23 +179,23 @@ namespace Banque_Misr {
     }
 
     private void frmRegister_Load(object sender, EventArgs e) {
-      showPassword();
+      ShowPassword();
       fs = new FileStream("ClientInfo.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
       sw = new StreamWriter(fs);
       sr = new StreamReader(fs);
+
       fs.Seek(0, SeekOrigin.Begin);
-      if (sr.ReadLine() == ((int)Mode.Dark).ToString()) {
-        mode = Mode.Dark;
-        darkToggle_Click(sender, e);
-      }
-      else {
-        mode = Mode.Light;
-        darkToggle_Click(sender, e);
-      }
+
+      if (sr.ReadLine() == ((int)Mode.Dark).ToString())
+        SetDark();
+      else
+        SetLight();
+
       sr.DiscardBufferedData();
     }
 
     private void btnClose_Click(object sender, EventArgs e) {
+      close();
       Application.Exit();
     }
 
@@ -197,29 +203,19 @@ namespace Banque_Misr {
       this.WindowState = FormWindowState.Minimized;
     }
 
-    private void btnMaximize_Click(object sender, EventArgs e) {
-      //if (this.WindowState == FormWindowState.Normal)
-      //    this.WindowState = FormWindowState.Maximized;
-      //else
-      //    this.WindowState = FormWindowState.Normal;
-
-    }
-
 
     private void darkToggle_MouseEnter(object sender, EventArgs e) {
-      if (mode == Mode.Light) {
-        //darkToggle.FlatAppearance.MouseOverBackColor = Color.WhiteSmoke;
+      if (mode == Mode.Dark) {
         darkToggle.Image = (System.Drawing.Image)(Banque_Misr.Properties.Resources.Lightmode_v1Hover);
         darkToggle.FlatAppearance.BorderColor = Color.FromArgb(13, 17, 24);
         return;
       }
-      //darkToggle.FlatAppearance.MouseOverBackColor = Color.LightSlateGray;
       darkToggle.Image = (System.Drawing.Image)(Banque_Misr.Properties.Resources.Nightmode_onHover);
       darkToggle.FlatAppearance.BorderColor = Color.White;
     }
 
     private void darkToggle_MouseLeave(object sender, EventArgs e) {
-      if (mode == Mode.Light) {
+      if (mode == Mode.Dark) {
         darkToggle.Image = (Banque_Misr.Properties.Resources.Lightmode_v1);
         darkToggle.FlatAppearance.MouseDownBackColor = Color.Transparent;
         darkToggle.FlatAppearance.MouseOverBackColor = Color.Transparent;
