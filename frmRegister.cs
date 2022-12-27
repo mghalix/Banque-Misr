@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace Banque_Misr {
-  public partial class frmRegister : Form {
+  public partial class frmRegister : Form, IShowPassword {
     //Members
     private bool darkOn = true;
     public FileStream fs;
@@ -156,9 +156,9 @@ namespace Banque_Misr {
     }
 
     private void checkbxShowPass_CheckedChanged(object sender, EventArgs e) {
-      ShowPassword();
+      showPassword();
     }
-    public void ShowPassword() {
+    public void showPassword() {
       txtPassword.MaxLength = 14;
       txtComPassword.MaxLength = 14;
 
@@ -173,7 +173,7 @@ namespace Banque_Misr {
     }
 
     private void frmRegister_Load(object sender, EventArgs e) {
-      ShowPassword();
+      showPassword();
       fs = new FileStream("ClientInfo.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
       sw = new StreamWriter(fs);
       sr = new StreamReader(fs);

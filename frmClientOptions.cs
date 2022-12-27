@@ -9,7 +9,6 @@ namespace Banque_Misr {
       pnlViewForm.Dock = DockStyle.Bottom;
 
       frm.TopLevel = false;
-
       pnlViewForm.Controls.Add(frm);
       frm.Show();
     }
@@ -21,6 +20,10 @@ namespace Banque_Misr {
           initPanelOpt(transfer);
           break;
         case 1: // view balance
+          //string axn = "INSERT INTO branch VALUES('TestName2', 'TestCode2')";
+          //DatabaseHandler.execAction(axn);
+          string query = "SELECT * FROM branch";
+          //DatabaseHandler.execQuery(query).
           break;
         case 2: // deposit
           frmDeposit deposit = new frmDeposit();

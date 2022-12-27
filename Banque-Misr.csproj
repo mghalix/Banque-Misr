@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Control\DatabaseHandler.cs" />
     <Compile Include="frmClientOptions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,7 +89,11 @@
     <Compile Include="frmWithdraw.Designer.cs">
       <DependentUpon>frmWithdraw.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interface1.cs" />
+    <Compile Include="IShowPassword.cs" />
+    <Compile Include="Model\AccountTypes.cs" />
+    <Compile Include="Model\Client.cs" />
+    <Compile Include="Model\Modes.cs" />
+    <Compile Include="Model\Preferences.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmClientOptions.resx">
