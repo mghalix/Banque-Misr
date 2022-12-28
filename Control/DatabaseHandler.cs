@@ -7,8 +7,8 @@ namespace Banque_Misr.Control {
     private const string DB_MASTER_URL = @"Data Source=.;Initial Catalog=master;Integrated Security=True";
     private const string DB_URL = @"Data Source=.;Initial Catalog=Banque_Misr;Integrated Security=True";
     private const string DB_NAME = "Banque_Misr";
-
-    public DatabaseHandler() {
+    private static DatabaseHandler s_databaseHandler;
+    private DatabaseHandler() {
       createDB();
       setUpTableBranch();
       setUpTableClient();
@@ -16,7 +16,13 @@ namespace Banque_Misr.Control {
       setUpTableTransaction();
     }
 
-    void createDB() {
+    public static DatabaseHandler GetInstance() {
+      if (s_databaseHandler == null)
+        s_databaseHandler = new DatabaseHandler();
+      return s_databaseHandler;
+    }
+
+    private void createDB() {
       if (CheckDatabaseExists(DB_MASTER_URL, DB_NAME))
         return;
 
@@ -34,7 +40,7 @@ namespace Banque_Misr.Control {
       }
     }
     private void setUpTableTransaction() {
-      if (CheckTableExists("bank_transaction")) {
+      if (checkTableExists("bank_transaction")) {
         return;
       }
       string createTableTransaction = $@"Create table bank_transaction (
@@ -48,9 +54,9 @@ namespace Banque_Misr.Control {
       client_number                 VARCHAR(20)  FOREIGN KEY REFERENCES client(acc_no)
       )";
 
-      execAction(createTableTransaction);
+      ExecAction(createTableTransaction);
     }
-    private bool CheckTableExists(string tableName) {
+    private bool checkTableExists(string tableName) {
       using (SqlConnection conn = new SqlConnection(DB_URL)) {
         using (SqlCommand cmd = new SqlCommand("SELECT CASE WHEN EXISTS((SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '" + tableName + "')) THEN 1 ELSE 0 END", conn)) {
           conn.Open();
@@ -60,7 +66,7 @@ namespace Banque_Misr.Control {
     }
 
     private void setUpTableEmployee() {
-      if (CheckTableExists("employee")) {
+      if (checkTableExists("employee")) {
         return;
       }
       const string createTableEmp = @"CREATE TABLE employee (
@@ -72,11 +78,11 @@ namespace Banque_Misr.Control {
       manager_id    VARCHAR (20)  FOREIGN KEY REFERENCES employee(id
 )
       )";
-      execAction(createTableEmp);
+      ExecAction(createTableEmp);
     }
 
     private void setUpTableClient() {
-      if (CheckTableExists("client")) {
+      if (checkTableExists("client")) {
         return;
       }
       const string createTableClient = @"CREATE TABLE client (
@@ -87,21 +93,21 @@ namespace Banque_Misr.Control {
       phone       VARCHAR (20),
       pass	      VARCHAR (20) NOT NULL
       )";
-      execAction(createTableClient);
+      ExecAction(createTableClient);
     }
 
     private void setUpTableBranch() {
-      if (CheckTableExists("branch")) {
+      if (checkTableExists("branch")) {
         return;
       }
       const string createTableBranch = @"CREATE TABLE branch (
       branch_code   VARCHAR(20) PRIMARY KEY,
       branch_name   VARCHAR(20)
       )";
-      execAction(createTableBranch);
+      ExecAction(createTableBranch);
     }
 
-    public T execQuery<T>(string query) where T : class, new() {
+    public T ExecQuery<T>(string query) where T : class, new() {
       T obj = new T();
       try {
         using (SqlConnection conn = new SqlConnection(DB_URL))
@@ -119,7 +125,8 @@ namespace Banque_Misr.Control {
       }
       return obj;
     }
-    public bool execAction(string action) {
+
+    public bool ExecAction(string action) {
       try {
         using (SqlConnection conn = new SqlConnection(DB_URL))
         using (SqlCommand cmd = new SqlCommand(action, conn)) {
@@ -147,6 +154,18 @@ namespace Banque_Misr.Control {
           return (command.ExecuteScalar() != DBNull.Value);
         }
       }
+    }
+
+    public bool CheckUserExist(string accNo) {
+      string query = $@"SELECT * FROM client WHERE acc_no={accNo}";
+      using (SqlConnection conn = new SqlConnection(DB_URL)) {
+        using (SqlCommand cmd = new SqlCommand(query, conn)) {
+          conn.Open();
+          if ((int)cmd.ExecuteScalar() > 0)
+            return true;
+        }
+      }
+      return false;
     }
 
   }

@@ -18,14 +18,14 @@ namespace Banque_Misr {
 
       fs.Seek(0, SeekOrigin.Begin);
 
-      if (Preferences.sMode == Mode.Light)
+      if (Preferences.Mode == Mode.Light)
         SetLight();
       else
         SetDark();
     }
     void close() {
       fs.Seek(0, SeekOrigin.Begin);
-      sw.WriteLine((int)Preferences.sMode);
+      sw.WriteLine((int)Preferences.Mode);
       sw.Flush();
       sw.Close();
       sr.Close();
@@ -67,7 +67,7 @@ namespace Banque_Misr {
       }
     }
     public void SetLight() {
-      Preferences.sMode = Mode.Light;
+      Preferences.Mode = Mode.Light;
       darkToggle.FlatAppearance.MouseDownBackColor = Color.Transparent;
       this.BackColor = Color.White;
       this.ForeColor = Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(165)))), ((int)(((byte)(169)))));
@@ -79,7 +79,7 @@ namespace Banque_Misr {
     }
     public void SetDark() {
       darkToggle.FlatAppearance.MouseDownBackColor = Color.Transparent;
-      Preferences.sMode = Mode.Dark;
+      Preferences.Mode = Mode.Dark;
       this.ForeColor = Color.GhostWhite;
       this.BackColor = Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
       darkToggle.BackColor = System.Drawing.Color.Transparent;
@@ -102,7 +102,7 @@ namespace Banque_Misr {
 
     private void darkToggle_Click(object sender, System.EventArgs e) {
       darkToggle.Image = null;
-      if (Preferences.sMode == Mode.Light)
+      if (Preferences.Mode == Mode.Light)
         SetDark();
       else
         SetLight();
@@ -113,7 +113,7 @@ namespace Banque_Misr {
     }
 
     void controlsColor() {
-      if (Preferences.sMode == Mode.Light) {
+      if (Preferences.Mode == Mode.Light) {
         selectedForm.BackColor = Color.White;
         selectedForm.ForeColor = Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(165)))), ((int)(((byte)(169)))));
       }
@@ -123,7 +123,7 @@ namespace Banque_Misr {
       }
 
       foreach (object c in selectedForm.Controls) {
-        if (Preferences.sMode == Mode.Light) {
+        if (Preferences.Mode == Mode.Light) {
           if (c is Label) {
             ((Label)c).ForeColor = Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(41)))), ((int)(((byte)(87)))));
           }
@@ -144,7 +144,7 @@ namespace Banque_Misr {
       }
     }
     private void darkToggle_MouseEnter(object sender, EventArgs e) {
-      if (Preferences.sMode == Mode.Dark) {
+      if (Preferences.Mode == Mode.Dark) {
         darkToggle.Image = (System.Drawing.Image)(Banque_Misr.Properties.Resources.Lightmode_v1Hover);
         darkToggle.FlatAppearance.BorderColor = Color.FromArgb(13, 17, 24);
         return;
@@ -154,7 +154,7 @@ namespace Banque_Misr {
     }
 
     private void darkToggle_MouseLeave(object sender, EventArgs e) {
-      if (Preferences.sMode == Mode.Dark) {
+      if (Preferences.Mode == Mode.Dark) {
         darkToggle.Image = (Banque_Misr.Properties.Resources.Lightmode_v1);
         darkToggle.FlatAppearance.MouseDownBackColor = Color.Transparent;
         darkToggle.FlatAppearance.MouseOverBackColor = Color.Transparent;

@@ -100,8 +100,10 @@
     <Compile Include="Model\AccountTypes.cs" />
     <Compile Include="Model\Branch.cs" />
     <Compile Include="Model\Client.cs" />
+    <Compile Include="Model\IValidate.cs" />
     <Compile Include="Model\Modes.cs" />
     <Compile Include="Model\Preferences.cs" />
+    <Compile Include="Model\Validation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FrmClientOptions.resx">

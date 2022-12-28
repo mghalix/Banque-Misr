@@ -28,8 +28,8 @@
       this.lblHaveAcc = new System.Windows.Forms.Label();
       this.btnClear = new System.Windows.Forms.Button();
       this.btnRegister = new System.Windows.Forms.Button();
-      this.checkbxShowPass = new System.Windows.Forms.CheckBox();
-      this.txtAge = new System.Windows.Forms.TextBox();
+      this.chkShowPass = new System.Windows.Forms.CheckBox();
+      this.txtBranchCode = new System.Windows.Forms.TextBox();
       this.txtComPassword = new System.Windows.Forms.TextBox();
       this.lblBranchCode = new System.Windows.Forms.Label();
       this.lblConfPass = new System.Windows.Forms.Label();
@@ -37,16 +37,16 @@
       this.lblName = new System.Windows.Forms.Label();
       this.txtPassword = new System.Windows.Forms.TextBox();
       this.lblPass = new System.Windows.Forms.Label();
-      this.txtUsername = new System.Windows.Forms.TextBox();
+      this.txtAccNo = new System.Windows.Forms.TextBox();
       this.lblAccNo = new System.Windows.Forms.Label();
-      this.label1 = new System.Windows.Forms.Label();
+      this.lblGetStarted = new System.Windows.Forms.Label();
       this.btnMinimize = new System.Windows.Forms.Button();
       this.btnClose = new System.Windows.Forms.Button();
       this.darkToggle = new System.Windows.Forms.Button();
       this.lblAccType = new System.Windows.Forms.Label();
-      this.textBox2 = new System.Windows.Forms.TextBox();
+      this.txtPhoneNo = new System.Windows.Forms.TextBox();
       this.lblPhoneNo = new System.Windows.Forms.Label();
-      this.comboBox1 = new System.Windows.Forms.ComboBox();
+      this.cmbAccType = new System.Windows.Forms.ComboBox();
       this.SuspendLayout();
       // 
       // lblBackToLogin
@@ -103,31 +103,31 @@
       this.btnRegister.UseVisualStyleBackColor = false;
       this.btnRegister.Click += new System.EventHandler(this.button1_Click);
       // 
-      // checkbxShowPass
+      // chkShowPass
       // 
-      this.checkbxShowPass.AutoSize = true;
-      this.checkbxShowPass.Cursor = System.Windows.Forms.Cursors.Hand;
-      this.checkbxShowPass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.checkbxShowPass.Font = new System.Drawing.Font("Nirmala UI", 9.818182F, System.Drawing.FontStyle.Bold);
-      this.checkbxShowPass.Location = new System.Drawing.Point(120, 519);
-      this.checkbxShowPass.Name = "checkbxShowPass";
-      this.checkbxShowPass.Size = new System.Drawing.Size(129, 23);
-      this.checkbxShowPass.TabIndex = 21;
-      this.checkbxShowPass.Text = "Show Password";
-      this.checkbxShowPass.UseVisualStyleBackColor = true;
-      this.checkbxShowPass.CheckedChanged += new System.EventHandler(this.checkbxShowPass_CheckedChanged);
+      this.chkShowPass.AutoSize = true;
+      this.chkShowPass.Cursor = System.Windows.Forms.Cursors.Hand;
+      this.chkShowPass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.chkShowPass.Font = new System.Drawing.Font("Nirmala UI", 9.818182F, System.Drawing.FontStyle.Bold);
+      this.chkShowPass.Location = new System.Drawing.Point(120, 519);
+      this.chkShowPass.Name = "chkShowPass";
+      this.chkShowPass.Size = new System.Drawing.Size(129, 23);
+      this.chkShowPass.TabIndex = 21;
+      this.chkShowPass.Text = "Show Password";
+      this.chkShowPass.UseVisualStyleBackColor = true;
+      this.chkShowPass.CheckedChanged += new System.EventHandler(this.checkbxShowPass_CheckedChanged);
       // 
-      // txtAge
+      // txtBranchCode
       // 
-      this.txtAge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(231)))), ((int)(((byte)(233)))));
-      this.txtAge.BorderStyle = System.Windows.Forms.BorderStyle.None;
-      this.txtAge.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.26415F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.txtAge.ForeColor = System.Drawing.Color.Black;
-      this.txtAge.Location = new System.Drawing.Point(39, 206);
-      this.txtAge.Multiline = true;
-      this.txtAge.Name = "txtAge";
-      this.txtAge.Size = new System.Drawing.Size(216, 26);
-      this.txtAge.TabIndex = 1;
+      this.txtBranchCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(231)))), ((int)(((byte)(233)))));
+      this.txtBranchCode.BorderStyle = System.Windows.Forms.BorderStyle.None;
+      this.txtBranchCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.26415F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.txtBranchCode.ForeColor = System.Drawing.Color.Black;
+      this.txtBranchCode.Location = new System.Drawing.Point(39, 206);
+      this.txtBranchCode.Multiline = true;
+      this.txtBranchCode.Name = "txtBranchCode";
+      this.txtBranchCode.Size = new System.Drawing.Size(216, 26);
+      this.txtBranchCode.TabIndex = 1;
       // 
       // txtComPassword
       // 
@@ -205,17 +205,17 @@
       this.lblPass.TabIndex = 15;
       this.lblPass.Text = "Password";
       // 
-      // txtUsername
+      // txtAccNo
       // 
-      this.txtUsername.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(231)))), ((int)(((byte)(233)))));
-      this.txtUsername.BorderStyle = System.Windows.Forms.BorderStyle.None;
-      this.txtUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.26415F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.txtUsername.ForeColor = System.Drawing.Color.Black;
-      this.txtUsername.Location = new System.Drawing.Point(39, 258);
-      this.txtUsername.Multiline = true;
-      this.txtUsername.Name = "txtUsername";
-      this.txtUsername.Size = new System.Drawing.Size(216, 26);
-      this.txtUsername.TabIndex = 2;
+      this.txtAccNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(231)))), ((int)(((byte)(233)))));
+      this.txtAccNo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+      this.txtAccNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.26415F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.txtAccNo.ForeColor = System.Drawing.Color.Black;
+      this.txtAccNo.Location = new System.Drawing.Point(39, 258);
+      this.txtAccNo.Multiline = true;
+      this.txtAccNo.Name = "txtAccNo";
+      this.txtAccNo.Size = new System.Drawing.Size(216, 26);
+      this.txtAccNo.TabIndex = 2;
       // 
       // lblAccNo
       // 
@@ -227,16 +227,16 @@
       this.lblAccNo.TabIndex = 16;
       this.lblAccNo.Text = "Account Number";
       // 
-      // label1
+      // lblGetStarted
       // 
-      this.label1.AutoSize = true;
-      this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.69811F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(41)))), ((int)(((byte)(87)))));
-      this.label1.Location = new System.Drawing.Point(15, 66);
-      this.label1.Name = "label1";
-      this.label1.Size = new System.Drawing.Size(164, 31);
-      this.label1.TabIndex = 10;
-      this.label1.Text = "Get Started";
+      this.lblGetStarted.AutoSize = true;
+      this.lblGetStarted.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.69811F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.lblGetStarted.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(41)))), ((int)(((byte)(87)))));
+      this.lblGetStarted.Location = new System.Drawing.Point(15, 66);
+      this.lblGetStarted.Name = "lblGetStarted";
+      this.lblGetStarted.Size = new System.Drawing.Size(164, 31);
+      this.lblGetStarted.TabIndex = 10;
+      this.lblGetStarted.Text = "Get Started";
       // 
       // btnMinimize
       // 
@@ -246,7 +246,7 @@
       this.btnMinimize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
       this.btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.btnMinimize.ForeColor = System.Drawing.Color.Transparent;
-      this.btnMinimize.Image = global::Banque_Misr.Properties.Resources.titlebutton_minimize;
+      this.btnMinimize.Image = ((System.Drawing.Image)(resources.GetObject("btnMinimize.Image")));
       this.btnMinimize.Location = new System.Drawing.Point(32, 12);
       this.btnMinimize.Name = "btnMinimize";
       this.btnMinimize.Size = new System.Drawing.Size(24, 21);
@@ -264,7 +264,7 @@
       this.btnClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
       this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.btnClose.ForeColor = System.Drawing.Color.Transparent;
-      this.btnClose.Image = global::Banque_Misr.Properties.Resources.titlebutton_close;
+      this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
       this.btnClose.Location = new System.Drawing.Point(12, 12);
       this.btnClose.Name = "btnClose";
       this.btnClose.Size = new System.Drawing.Size(24, 21);
@@ -284,7 +284,7 @@
       this.darkToggle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
       this.darkToggle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.darkToggle.ForeColor = System.Drawing.Color.Transparent;
-      this.darkToggle.Image = global::Banque_Misr.Properties.Resources.Nightmode;
+      this.darkToggle.Image = ((System.Drawing.Image)(resources.GetObject("darkToggle.Image")));
       this.darkToggle.Location = new System.Drawing.Point(235, 28);
       this.darkToggle.Name = "darkToggle";
       this.darkToggle.Size = new System.Drawing.Size(36, 29);
@@ -304,17 +304,17 @@
       this.lblAccType.TabIndex = 38;
       this.lblAccType.Text = "Account Type";
       // 
-      // textBox2
+      // txtPhoneNo
       // 
-      this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(231)))), ((int)(((byte)(233)))));
-      this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-      this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.26415F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.textBox2.ForeColor = System.Drawing.Color.Black;
-      this.textBox2.Location = new System.Drawing.Point(41, 359);
-      this.textBox2.Multiline = true;
-      this.textBox2.Name = "textBox2";
-      this.textBox2.Size = new System.Drawing.Size(216, 26);
-      this.textBox2.TabIndex = 37;
+      this.txtPhoneNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(231)))), ((int)(((byte)(233)))));
+      this.txtPhoneNo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+      this.txtPhoneNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.26415F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.txtPhoneNo.ForeColor = System.Drawing.Color.Black;
+      this.txtPhoneNo.Location = new System.Drawing.Point(41, 359);
+      this.txtPhoneNo.Multiline = true;
+      this.txtPhoneNo.Name = "txtPhoneNo";
+      this.txtPhoneNo.Size = new System.Drawing.Size(216, 26);
+      this.txtPhoneNo.TabIndex = 37;
       // 
       // lblPhoneNo
       // 
@@ -326,18 +326,18 @@
       this.lblPhoneNo.TabIndex = 39;
       this.lblPhoneNo.Text = "Phone Number";
       // 
-      // comboBox1
+      // cmbAccType
       // 
-      this.comboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(231)))), ((int)(((byte)(233)))));
-      this.comboBox1.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.comboBox1.FormattingEnabled = true;
-      this.comboBox1.Items.AddRange(new object[] {
+      this.cmbAccType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(231)))), ((int)(((byte)(233)))));
+      this.cmbAccType.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.cmbAccType.FormattingEnabled = true;
+      this.cmbAccType.Items.AddRange(new object[] {
             "Savings Account",
             "Current Account"});
-      this.comboBox1.Location = new System.Drawing.Point(142, 300);
-      this.comboBox1.Name = "comboBox1";
-      this.comboBox1.Size = new System.Drawing.Size(115, 23);
-      this.comboBox1.TabIndex = 40;
+      this.cmbAccType.Location = new System.Drawing.Point(142, 300);
+      this.cmbAccType.Name = "cmbAccType";
+      this.cmbAccType.Size = new System.Drawing.Size(115, 23);
+      this.cmbAccType.TabIndex = 40;
       // 
       // FrmRegister
       // 
@@ -346,9 +346,9 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.White;
       this.ClientSize = new System.Drawing.Size(293, 702);
-      this.Controls.Add(this.comboBox1);
+      this.Controls.Add(this.cmbAccType);
       this.Controls.Add(this.lblAccType);
-      this.Controls.Add(this.textBox2);
+      this.Controls.Add(this.txtPhoneNo);
       this.Controls.Add(this.lblPhoneNo);
       this.Controls.Add(this.darkToggle);
       this.Controls.Add(this.btnMinimize);
@@ -357,8 +357,8 @@
       this.Controls.Add(this.lblHaveAcc);
       this.Controls.Add(this.btnClear);
       this.Controls.Add(this.btnRegister);
-      this.Controls.Add(this.checkbxShowPass);
-      this.Controls.Add(this.txtAge);
+      this.Controls.Add(this.chkShowPass);
+      this.Controls.Add(this.txtBranchCode);
       this.Controls.Add(this.txtComPassword);
       this.Controls.Add(this.lblBranchCode);
       this.Controls.Add(this.lblConfPass);
@@ -366,9 +366,9 @@
       this.Controls.Add(this.lblName);
       this.Controls.Add(this.txtPassword);
       this.Controls.Add(this.lblPass);
-      this.Controls.Add(this.txtUsername);
+      this.Controls.Add(this.txtAccNo);
       this.Controls.Add(this.lblAccNo);
-      this.Controls.Add(this.label1);
+      this.Controls.Add(this.lblGetStarted);
       this.Font = new System.Drawing.Font("Nirmala UI", 6.792453F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(165)))), ((int)(((byte)(169)))));
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -387,8 +387,8 @@
     private System.Windows.Forms.Label lblHaveAcc;
     private System.Windows.Forms.Button btnClear;
     private System.Windows.Forms.Button btnRegister;
-    private System.Windows.Forms.CheckBox checkbxShowPass;
-    private System.Windows.Forms.TextBox txtAge;
+    private System.Windows.Forms.CheckBox chkShowPass;
+    private System.Windows.Forms.TextBox txtBranchCode;
     private System.Windows.Forms.TextBox txtComPassword;
     private System.Windows.Forms.Label lblBranchCode;
     private System.Windows.Forms.Label lblConfPass;
@@ -396,15 +396,15 @@
     private System.Windows.Forms.Label lblName;
     private System.Windows.Forms.TextBox txtPassword;
     private System.Windows.Forms.Label lblPass;
-    private System.Windows.Forms.TextBox txtUsername;
+    private System.Windows.Forms.TextBox txtAccNo;
     private System.Windows.Forms.Label lblAccNo;
-    private System.Windows.Forms.Label label1;
+    private System.Windows.Forms.Label lblGetStarted;
     private System.Windows.Forms.Button btnMinimize;
     private System.Windows.Forms.Button btnClose;
     private System.Windows.Forms.Button darkToggle;
     private System.Windows.Forms.Label lblAccType;
-    private System.Windows.Forms.TextBox textBox2;
+    private System.Windows.Forms.TextBox txtPhoneNo;
     private System.Windows.Forms.Label lblPhoneNo;
-    private System.Windows.Forms.ComboBox comboBox1;
+    private System.Windows.Forms.ComboBox cmbAccType;
   }
 }

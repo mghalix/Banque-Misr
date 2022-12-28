@@ -11,15 +11,15 @@ namespace Banque_Misr {
     /// </summary>
     [STAThread]
     static void Main() {
-      DatabaseHandler dataHandler = new DatabaseHandler();
+      DatabaseHandler dataHandler = DatabaseHandler.GetInstance();
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
       FileStream fs = new FileStream("ClientInfo.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
       StreamReader sr = new StreamReader(fs);
       if (sr.ReadLine() == ((int)Mode.Dark).ToString())
-        Preferences.sMode = Mode.Dark;
+        Preferences.Mode = Mode.Dark;
       else
-        Preferences.sMode = Mode.Light;
+        Preferences.Mode = Mode.Light;
       sr.Close();
       fs.Close();
 

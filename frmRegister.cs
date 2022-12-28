@@ -1,4 +1,5 @@
-﻿using Banque_Misr.Model;
+﻿using Banque_Misr.Control;
+using Banque_Misr.Model;
 using System;
 using System.Drawing;
 using System.IO;
@@ -11,7 +12,6 @@ namespace Banque_Misr {
     private readonly FileStream fs;
     private readonly StreamWriter sw;
     private readonly StreamReader sr;
-
     [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
     private static extern IntPtr CreateRoundRectRgn(
         int nLeftRect,     // x-coordinate of upper-left corner
@@ -36,7 +36,7 @@ namespace Banque_Misr {
 
     void close() {
       fs.Seek(0, SeekOrigin.Begin);
-      sw.WriteLine((int)Preferences.sMode);
+      sw.WriteLine((int)Preferences.Mode);
       sw.Flush();
       sw.Close();
       sr.Close();
@@ -44,7 +44,7 @@ namespace Banque_Misr {
     }
 
     private void darkToggle_Click(object sender, EventArgs e) {
-      if (Preferences.sMode == Mode.Light) {//On white page 
+      if (Preferences.Mode == Mode.Light) {//On white page 
         SetDark();
         return;
       }
@@ -53,7 +53,7 @@ namespace Banque_Misr {
     }
 
     public void SetDark() {
-      Preferences.sMode = Mode.Dark;
+      Preferences.Mode = Mode.Dark;
       this.ForeColor = Color.GhostWhite;
       this.BackColor = Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
       //------------------------------------//
@@ -91,11 +91,11 @@ namespace Banque_Misr {
       darkToggle.UseVisualStyleBackColor = false;
       darkToggle.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
 
-      checkbxShowPass.ForeColor = Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(165)))), ((int)(((byte)(169)))));
-      checkbxShowPass.BackColor = Color.Transparent;
+      chkShowPass.ForeColor = Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(165)))), ((int)(((byte)(169)))));
+      chkShowPass.BackColor = Color.Transparent;
 
       //Colors
-      label1.ForeColor = Color.FromArgb(((int)(((byte)(98)))), ((int)(((byte)(120)))), ((int)(((byte)(255)))));
+      lblGetStarted.ForeColor = Color.FromArgb(((int)(((byte)(98)))), ((int)(((byte)(120)))), ((int)(((byte)(255)))));
       btnRegister.BackColor = Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(77)))), ((int)(((byte)(163)))));
       btnClear.ForeColor = Color.FromArgb(((int)(((byte)(98)))), ((int)(((byte)(120)))), ((int)(((byte)(255)))));
       btnClear.BackColor = Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
@@ -103,7 +103,7 @@ namespace Banque_Misr {
     }
 
     public void SetLight() {
-      Preferences.sMode = Mode.Light;
+      Preferences.Mode = Mode.Light;
       this.BackColor = Color.White;
       this.ForeColor = Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(165)))), ((int)(((byte)(169)))));
       //--------------------------------//
@@ -146,21 +146,34 @@ namespace Banque_Misr {
     }
 
     private void button1_Click(object sender, EventArgs e) {
+      DatabaseHandler dataHandler = DatabaseHandler.GetInstance();
+      Validation validate = new Validation();
+
+      if (!validate.AccountNumber(txtAccNo) || !validate.Password(txtPassword)) {
+
+      }
+
+      if (dataHandler.CheckUserExist(txtAccNo.Text)) {
+        MessageBox.Show("Username already exists, please choose another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        txtAccNo.Clear();
+        return;
+      }
+
       fs.Seek(3, SeekOrigin.End);
       string line;
       while ((line = sr.ReadLine()) != null) {
         string[] field = line.Split('|');
-        if (txtUsername.Text.ToLower() == field[2]) {
+        if (txtAccNo.Text.ToLower() == field[2]) {
           MessageBox.Show("Username already exists, please choose another one", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-          txtUsername.Clear();
+          txtAccNo.Clear();
           return;
         }
       }
-      if (txtUsername.Text == "" || txtPassword.Text == "" || txtComPassword.Text == "" || txtAge.Text == "" || txtName.Text == "")
+      if (txtAccNo.Text == "" || txtPassword.Text == "" || txtComPassword.Text == "" || txtBranchCode.Text == "" || txtName.Text == "")
         MessageBox.Show("Registration Failed. Please fill in all fields", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
       else if (txtPassword.Text == txtComPassword.Text) {
         fs.Seek(0, SeekOrigin.End);
-        sw.WriteLine($"{txtName.Text}|{txtAge.Text}|{txtUsername.Text.ToLower()}|{txtPassword.Text}");
+        sw.WriteLine($"{txtName.Text}|{txtBranchCode.Text}|{txtAccNo.Text.ToLower()}|{txtPassword.Text}");
         label6_Click(sender, e);
         MessageBox.Show("Your Account has been Succesfully Created", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
       }
@@ -175,8 +188,8 @@ namespace Banque_Misr {
 
     private void button2_Click(object sender, EventArgs e) {
       txtName.Clear();
-      txtAge.Clear();
-      txtUsername.Clear();
+      txtBranchCode.Clear();
+      txtAccNo.Clear();
       txtPassword.Clear();
       txtComPassword.Clear();
     }
@@ -188,7 +201,7 @@ namespace Banque_Misr {
       txtPassword.MaxLength = 14;
       txtComPassword.MaxLength = 14;
 
-      if (!checkbxShowPass.Checked) {
+      if (!chkShowPass.Checked) {
         txtPassword.PasswordChar = '•';
         txtComPassword.PasswordChar = '•';
       }
@@ -201,7 +214,7 @@ namespace Banque_Misr {
     private void frmRegister_Load(object sender, EventArgs e) {
       ShowPassword();
 
-      if (Preferences.sMode == Mode.Dark)
+      if (Preferences.Mode == Mode.Dark)
         SetDark();
       else
         SetLight();
@@ -218,7 +231,7 @@ namespace Banque_Misr {
 
 
     private void darkToggle_MouseEnter(object sender, EventArgs e) {
-      if (Preferences.sMode == Mode.Dark) {
+      if (Preferences.Mode == Mode.Dark) {
         darkToggle.Image = (System.Drawing.Image)(Banque_Misr.Properties.Resources.Lightmode_v1Hover);
         darkToggle.FlatAppearance.BorderColor = Color.FromArgb(13, 17, 24);
         return;
@@ -228,7 +241,7 @@ namespace Banque_Misr {
     }
 
     private void darkToggle_MouseLeave(object sender, EventArgs e) {
-      if (Preferences.sMode == Mode.Dark) {
+      if (Preferences.Mode == Mode.Dark) {
         darkToggle.Image = (Banque_Misr.Properties.Resources.Lightmode_v1);
         darkToggle.FlatAppearance.MouseDownBackColor = Color.Transparent;
         darkToggle.FlatAppearance.MouseOverBackColor = Color.Transparent;
