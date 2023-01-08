@@ -149,8 +149,8 @@ namespace Banque_Misr {
       DatabaseHandler dataHandler = DatabaseHandler.GetInstance();
       Validation validate = new Validation();
 
-      if (!validate.AccountNumber(txtAccNo) || !validate.Password(txtPassword)) {
-
+      if (!validate.AccountNumber(txtAccNo.Text) || !validate.Password(txtPassword.Text)) {
+        // TODO
       }
 
       if (dataHandler.CheckUserExist(txtAccNo.Text)) {
